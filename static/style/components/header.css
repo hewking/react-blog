@@ -5,3 +5,18 @@
   height: 2.8rem;
   border-bottom: 1px solid ;
 }
+
+.header-logo {
+   color: #1390ff;
+   font-size: 1.4rem;
+   text-align: left;
+}
+
+ 
+/* .3rem 是0.3 的意思 */
+.hheader-text {
+  color: skyblue;
+  font-size: .6rem;
+  padding-left: .3rem; 
+  display: inline-block;
+}
