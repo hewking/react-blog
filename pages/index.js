@@ -7,6 +7,7 @@ import Header from '../components/Header'
 import { useState } from 'react';
 import {CalendarOutlined, VideoCameraOutlined, FireOutlined} from "@ant-design/icons";
 import Author from '../components/Author';
+import Advert from '../components/Advert';
 
 export default function Home() {
 
@@ -46,6 +47,7 @@ export default function Home() {
         </Col>
         <Col className='comm-right' xs={0} sm={0} md={7} lg={5} xl={4}>
           <Author />
+          <Advert/>
         </Col>
       </Row>
     </div>
