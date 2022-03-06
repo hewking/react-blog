@@ -13,10 +13,25 @@
 }
 
  
-/* .3rem 是0.3 的意思 */
+/* .3rem 是0.3 根元素的 font-size 的意思 */
 .header_text {
-  color: red;
+  color: #999;
   font-size: .6rem;
   padding-left: .3rem; 
   display: inline-block;
+}
+
+.ant_menu {
+  line-height: 2.6rem;
+}
+
+.ant_menu_item {
+  font-size: 0.7rem !important; /* !important 意思是以这里定义的属性为优先*/
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.header_menu_icon {
+  padding-left: 0.3rem;
+  padding-right:0.3rem;
 }
