@@ -1,6 +1,5 @@
 import { Col, Row, List } from 'antd'
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import listStyles from '../static/style/pages/index.module.css';
 import Header from '../components/Header'
@@ -8,6 +7,7 @@ import { useState } from 'react';
 import {CalendarOutlined, VideoCameraOutlined, FireOutlined} from "@ant-design/icons";
 import Author from '../components/Author';
 import Advert from '../components/Advert';
+import Footer from '../components/Footer';
 
 export default function Home() {
 
@@ -50,6 +50,7 @@ export default function Home() {
           <Advert/>
         </Col>
       </Row>
+      <Footer/>
     </div>
   )
 } 
