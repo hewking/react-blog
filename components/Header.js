@@ -6,7 +6,7 @@ import { CrownOutlined , YoutubeOutlined, HomeOutlined} from '@ant-design/icons'
 const Header = () => {
   return <div className={styles.header}>
     <Row type="flex" justify='center'>
-      <Col xs={24} sm={24} md={10} lg={10} xl={10}>
+      <Col xs={24} sm={24} md={10} lg={15} xl={12}>
         <span className={styles.header_logo }>技术胖</span>
         <span className={styles.header_text}>专注前端开发，每年 100 集免费视频。</span>
       </Col>
