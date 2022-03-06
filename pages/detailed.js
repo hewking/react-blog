@@ -65,7 +65,7 @@ export default function Detailed() {
               </Breadcrumb>
             </div>
             <div>
-              <div className='detailed-title'>
+              <div className={detailStyles.detailed_title}>
 
               </div>
               <div className='list-icon center'>
@@ -73,7 +73,7 @@ export default function Detailed() {
                 <span><FolderOutlined /> 视频教程</span>
                 <span><FireOutlined />10000</span>
               </div>
-              <div className='detailed-content'>
+              <div className={detailStyles.detailed_content}>
                 <ReactMarkDown children={markdown}
                 remarkPlugins={[remarkGfm]} 
                 /> 
