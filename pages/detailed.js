@@ -68,7 +68,7 @@ export default function Detailed() {
               <div className={detailStyles.detailed_title}>
 
               </div>
-              <div className='list-icon center'>
+              <div className={detailStyles.list_icon}>
                 <span><CalendarOutlined />2022-03-06</span>
                 <span><FolderOutlined /> 视频教程</span>
                 <span><FireOutlined />10000</span>

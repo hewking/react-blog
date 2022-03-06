@@ -16,11 +16,13 @@
 }
 
 .list_icon {
-
+  text-align: center;
+  padding-top: .5rem;
 }
 
 .list_icon span {
-  
+  padding-left: .5rem;
+  padding-right: .5rem;
 }
 
 .center {
