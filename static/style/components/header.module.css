@@ -14,8 +14,8 @@
 
  
 /* .3rem 是0.3 的意思 */
-.hheader-text {
-  color: skyblue;
+.header_text {
+  color: red;
   font-size: .6rem;
   padding-left: .3rem; 
   display: inline-block;
