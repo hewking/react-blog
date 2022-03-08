@@ -27,7 +27,7 @@ export default function Home() {
       <Row type="flex" justify='center' className='comm-main'>
         <Col className='comm-left' xs={24} sm={24} md={16} lg={18} xl={14}>
           <List
-            header={<div cla>最新日志</div>}
+            header={<div>最新日志</div>}
             itemLayout="vertical"
             dataSource={list}
             renderItem={item => {

@@ -517,6 +517,11 @@
   "resolved" "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.21.0.tgz"
   "version" "3.21.0"
 
+"core-js@3":
+  "integrity" "sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig=="
+  "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.21.1.tgz"
+  "version" "3.21.1"
+
 "cross-spawn@^7.0.2":
   "integrity" "sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w=="
   "resolved" "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz"
@@ -1326,6 +1331,15 @@
   dependencies:
     "yallist" "^4.0.0"
 
+"markdown-navbar@^1.4.3":
+  "integrity" "sha512-esZQ9fHbjnOq/YnmKRrHTRhIO5+UmU3g5BS2tly7RwWrWCjOWv0Nq2A8r1GF9IBZKvrwM/rzaMgjjsQlkbh0tA=="
+  "resolved" "https://registry.npmjs.org/markdown-navbar/-/markdown-navbar-1.4.3.tgz"
+  "version" "1.4.3"
+  dependencies:
+    "core-js" "3"
+    "prop-types" "^15.7.2"
+    "react" "^16.12.0"
+
 "markdown-table@^3.0.0":
   "integrity" "sha512-y8j3a5/DkJCmS5x4dMCQL+OR0+2EAq3DOtio1COSHsmW2BGXnNCK3v12hJt1LrUz5iZH5g0LmuYOjDdI+czghA=="
   "resolved" "https://registry.npmjs.org/markdown-table/-/markdown-table-3.0.2.tgz"
@@ -1971,7 +1985,7 @@
   "resolved" "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
   "version" "1.2.1"
 
-"prop-types@^15.0.0", "prop-types@^15.7.2":
+"prop-types@^15.0.0", "prop-types@^15.6.2", "prop-types@^15.7.2":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -2388,6 +2402,15 @@
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
+
+"react@^16.12.0":
+  "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
+  "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
+  "version" "16.14.0"
+  dependencies:
+    "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.2"
 
 "regenerator-runtime@^0.13.4":
   "integrity" "sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA=="

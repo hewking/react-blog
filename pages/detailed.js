@@ -1,52 +1,53 @@
-import { Col, Row, Breadcrumb } from 'antd'
+import { Col, Row, Breadcrumb, Affix } from 'antd'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Header from '../components/Header'
 import detailStyles from '../static/style/pages/detailed.module.css';
-import { CalendarOutlined , FolderOutlined, FireOutlined} from '@ant-design/icons';
+import { CalendarOutlined, FolderOutlined, FireOutlined } from '@ant-design/icons';
 import Author from '../components/Author';
 import Advert from '../components/Advert';
 import Footer from '../components/Footer';
 import ReactMarkDown from 'react-markdown';
 import remarkGfm from 'remark-gfm'
-
+import MarkNav from 'markdown-navbar';
+import 'markdown-navbar/dist/navbar.css';
 
 export default function Detailed() {
 
-  const markdown='# P01:课程介绍和环境搭建\n' +
-  '[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
-  '> Mditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已... \n\n' +
-   '**这是加粗的文字**\n\n' +
-  '*这是倾斜的文字*`\n\n' +
-  '***这是斜体加粗的文字***\n\n' +
-  '~~这是加删除线的文字~~ \n\n'+
-  '\`console.log(111)\` \n\n'+
-  '# p02:来个Hello World 初始Vue3.0\n' +
-  '> aaaaaaaaa\n' +
-  '>> bbbbbbbbb\n' +
-  '>>> cccccccccc\n'+
-  '***\n\n\n' +
-  '# p03:Vue3.0基础知识讲解\n' +
-  '> aaaaaaaaa\n' +
-  '>> bbbbbbbbb\n' +
-  '>>> cccccccccc\n\n'+
-  '# p04:Vue3.0基础知识讲解\n' +
-  '> aaaaaaaaa\n' + 
-  '>> bbbbbbbbb\n' +
-  '>>> cccccccccc\n\n'+
-  '#5 p05:Vue3.0基础知识讲解\n' +
-  '> aaaaaaaaa\n' +
-  '>> bbbbbbbbb\n' +
-  '>>> cccccccccc\n\n'+
-  '# p06:Vue3.0基础知识讲解\n' +
-  '> aaaaaaaaa\n' +
-  '>> bbbbbbbbb\n' +
-  '>>> cccccccccc\n\n'+
-  '# p07:Vue3.0基础知识讲解\n' +
-  '> aaaaaaaaa\n' +
-  '>> bbbbbbbbb\n' +
-  '>>> cccccccccc\n\n'+
-  '``` var a=11; ```';
+  const markdown = '# P01:课程介绍和环境搭建\n' +
+    '[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
+    '> Mditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已... \n\n' +
+    '**这是加粗的文字**\n\n' +
+    '*这是倾斜的文字*`\n\n' +
+    '***这是斜体加粗的文字***\n\n' +
+    '~~这是加删除线的文字~~ \n\n' +
+    '\`console.log(111)\` \n\n' +
+    '# p02:来个Hello World 初始Vue3.0\n' +
+    '> aaaaaaaaa\n' +
+    '>> bbbbbbbbb\n' +
+    '>>> cccccccccc\n' +
+    '***\n\n\n' +
+    '# p03:Vue3.0基础知识讲解\n' +
+    '> aaaaaaaaa\n' +
+    '>> bbbbbbbbb\n' +
+    '>>> cccccccccc\n\n' +
+    '# p04:Vue3.0基础知识讲解\n' +
+    '> aaaaaaaaa\n' +
+    '>> bbbbbbbbb\n' +
+    '>>> cccccccccc\n\n' +
+    '#5 p05:Vue3.0基础知识讲解\n' +
+    '> aaaaaaaaa\n' +
+    '>> bbbbbbbbb\n' +
+    '>>> cccccccccc\n\n' +
+    '# p06:Vue3.0基础知识讲解\n' +
+    '> aaaaaaaaa\n' +
+    '>> bbbbbbbbb\n' +
+    '>>> cccccccccc\n\n' +
+    '# p07:Vue3.0基础知识讲解\n' +
+    '> aaaaaaaaa\n' +
+    '>> bbbbbbbbb\n' +
+    '>>> cccccccccc\n\n' +
+    '``` var a=11; ```';
 
   return (
     <div className={styles.container}>
@@ -75,18 +76,30 @@ export default function Detailed() {
               </div>
               <div className={detailStyles.detailed_content}>
                 <ReactMarkDown children={markdown}
-                remarkPlugins={[remarkGfm]} 
-                /> 
+                  remarkPlugins={[remarkGfm]}
+                />
               </div>
             </div>
           </div>
         </Col>
         <Col className='comm-right' xs={0} sm={0} md={7} lg={5} xl={4}>
-          <Author/>
-          <Advert/>
-          </Col>
+          <Author />
+          <Advert />
+          <Affix offsetTop={5}>
+            {/* 这样既可css定义的样式和css modules 定义的样式都生效 */}
+            <div className={`comm-box ${detailStyles.detailed_nav}`}>
+              <div className={detailStyles.nav_title}>文章目录</div>
+              <MarkNav
+                className={detailStyles.article_menu}
+                source={markdown}
+                ordered={false}
+              />
+            </div>
+          </Affix>
+
+        </Col>
       </Row>
-      <Footer/>
+      <Footer />
     </div>
   )
 } 
