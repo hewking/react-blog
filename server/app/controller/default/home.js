@@ -3,13 +3,17 @@
 const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
+  
   async index() {
     const { ctx } = this;
-    ctx.body = 'hi, egg';
+    let result = await this.app.mysql.get("blog_content", { title: '测试文章' });
+    let data = JSON.stringify(result);
+    console.log("index get mysql_result" + JSON.stringify(result));
+    ctx.body = data;
   }
 
   async list() {
-    const {ctx} = this;
+    const { ctx } = this;
     ctx.body = 'hewking blog list';
   }
 
