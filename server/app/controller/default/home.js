@@ -16,7 +16,9 @@ class HomeController extends Controller {
     const sql = 'SELECT a.id as id,' +
       'a.title as title,' +
       'a.introduce as introduce,' +
-      'a.addTime as addTime,' +
+      // 时间戳转换为日期
+      // "FROM_UNIXTME(a.addTime, '%Y-%m-%d %H:%i:%s') as addTime," +
+      "a.addTime as addTime," +
       'a.view_count as view_count,' +
       'b.typeName as typeName ' +
       'FROM article a LEFT JOIN type b ON a.type_id = b.id';
