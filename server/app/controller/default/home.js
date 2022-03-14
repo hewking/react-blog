@@ -27,9 +27,23 @@ class HomeController extends Controller {
     ctx.body = { data: results };
   }
 
-  async list() {
-    const { ctx } = this;
-    ctx.body = 'hewking blog list';
+  async getArticleById(){
+
+    let id = this.ctx.params.id;
+
+    const sql = 'SELECT a.id as id,' +
+      'a.title as title,' +
+      'a.introduce as introduce,' +
+      "a.addTime as addTime," +
+      'a.view_count as view_count,' +
+      'b.typeName as typeName ' +
+      'FROM article a LEFT JOIN type b ON a.type_id = b.id '+
+      'WHERE a.id=' + id;
+
+      const result = await this.app.mysql.query(sql);
+
+      this.ctx.body = { data: result };
+
   }
 
 }

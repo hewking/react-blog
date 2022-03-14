@@ -1,5 +1,6 @@
 import { Col, Row, List } from 'antd'
 import Head from 'next/head'
+import Link from 'next/link';
 import styles from '../styles/Home.module.css'
 import listStyles from '../static/style/pages/index.module.css';
 import Header from '../components/Header'
@@ -29,7 +30,9 @@ export default function Home(data) {
             renderItem={item => {
               return (<List.Item>
                 <div className={listStyles.list_title}>
-                  {item.title}
+                  <Link href={{pathname:'/detailed', query:{id:item.id}}}>
+                    <a>{item.title}</a>
+                  </Link>
                 </div>
                 <div className={listStyles.list_icon}>
                   <span><CalendarOutlined />{item.addTime}</span>

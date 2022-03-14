@@ -6,6 +6,7 @@
 module.exports = app => {
   const { router, controller } = app;
   router.get('/default/index', controller.default.home.index);
-  router.get('/default/list', controller.default.home.list);
+  // 配置id query 参数
+  router.get('/default/getArticleById/:id', controller.default.home.getArticleById);
   router.get('/default/getAriticleList', controller.default.home.getAriticleList);
 };

@@ -11,8 +11,11 @@ import ReactMarkDown from 'react-markdown';
 import remarkGfm from 'remark-gfm'
 import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
+import axios from 'axios';
 
-export default function Detailed() {
+export default function Detailed(data) {
+
+  const { title, addTime, typeName, view_count, introduce, content } = data;
 
   const markdown = '# P01:课程介绍和环境搭建\n' +
     '[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
@@ -70,9 +73,9 @@ export default function Detailed() {
 
               </div>
               <div className={detailStyles.list_icon}>
-                <span><CalendarOutlined />2022-03-06</span>
-                <span><FolderOutlined /> 视频教程</span>
-                <span><FireOutlined />10000</span>
+                <span><CalendarOutlined />{addTime}</span>
+                <span><FolderOutlined /> {typeName}</span>
+                <span><FireOutlined />{view_count}人</span>
               </div>
               <div className={detailStyles.detailed_content}>
                 <ReactMarkDown children={markdown}
@@ -103,3 +106,17 @@ export default function Detailed() {
     </div>
   )
 } 
+
+
+Detailed.getInitialProps = async (context) => {
+  console.log(context.query.id);
+  
+  const id = context.query.id;
+
+  const promise = new Promise(resolve => {
+    axios('http://127.0.0.1:7001/default/getArticleById/' + id).then(res => {
+      resolve(res.data.data[0]);
+    });
+  });
+  return await promise;
+}
