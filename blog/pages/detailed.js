@@ -7,50 +7,34 @@ import { CalendarOutlined, FolderOutlined, FireOutlined } from '@ant-design/icon
 import Author from '../components/Author';
 import Advert from '../components/Advert';
 import Footer from '../components/Footer';
-import ReactMarkDown from 'react-markdown';
-import remarkGfm from 'remark-gfm'
 import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
 import axios from 'axios';
 
-export default function Detailed(data) {
+import { marked, Renderer } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/monokai-sublime.css';
 
-  const { title, addTime, typeName, view_count, introduce, content } = data;
+export default function Detailed(props) {
 
-  const markdown = '# P01:课程介绍和环境搭建\n' +
-    '[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
-    '> Mditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已... \n\n' +
-    '**这是加粗的文字**\n\n' +
-    '*这是倾斜的文字*`\n\n' +
-    '***这是斜体加粗的文字***\n\n' +
-    '~~这是加删除线的文字~~ \n\n' +
-    '\`console.log(111)\` \n\n' +
-    '# p02:来个Hello World 初始Vue3.0\n' +
-    '> aaaaaaaaa\n' +
-    '>> bbbbbbbbb\n' +
-    '>>> cccccccccc\n' +
-    '***\n\n\n' +
-    '# p03:Vue3.0基础知识讲解\n' +
-    '> aaaaaaaaa\n' +
-    '>> bbbbbbbbb\n' +
-    '>>> cccccccccc\n\n' +
-    '# p04:Vue3.0基础知识讲解\n' +
-    '> aaaaaaaaa\n' +
-    '>> bbbbbbbbb\n' +
-    '>>> cccccccccc\n\n' +
-    '#5 p05:Vue3.0基础知识讲解\n' +
-    '> aaaaaaaaa\n' +
-    '>> bbbbbbbbb\n' +
-    '>>> cccccccccc\n\n' +
-    '# p06:Vue3.0基础知识讲解\n' +
-    '> aaaaaaaaa\n' +
-    '>> bbbbbbbbb\n' +
-    '>>> cccccccccc\n\n' +
-    '# p07:Vue3.0基础知识讲解\n' +
-    '> aaaaaaaaa\n' +
-    '>> bbbbbbbbb\n' +
-    '>>> cccccccccc\n\n' +
-    '``` var a=11; ```';
+  const { title, addTime, typeName, view_count, introduce, article_content } = props;
+
+  const renderer = new Renderer();
+
+  marked.setOptions({
+    renderer: renderer,
+    gfm: true, // github 样式差不多的md 展示
+    pedantic: false,
+    sanitize: false, // 允许html标签
+    tables: true,
+    breaks: false,
+    smartLists: true,
+    innerHeight: function (code) {
+      return hljs.highlightAuto(code).value;
+    }
+  });
+
+  const html = marked(article_content);
 
   return (
     <div className={styles.container}>
@@ -77,10 +61,8 @@ export default function Detailed(data) {
                 <span><FolderOutlined /> {typeName}</span>
                 <span><FireOutlined />{view_count}人</span>
               </div>
-              <div className={detailStyles.detailed_content}>
-                <ReactMarkDown children={markdown}
-                  remarkPlugins={[remarkGfm]}
-                />
+              <div className={detailStyles.detailed_content}
+                dangerouslySetInnerHTML={{__html: html}}>
               </div>
             </div>
           </div>
@@ -94,7 +76,7 @@ export default function Detailed(data) {
               <div className={detailStyles.nav_title}>文章目录</div>
               <MarkNav
                 className={detailStyles.article_menu}
-                source={markdown}
+                source={html}
                 ordered={false}
               />
             </div>
@@ -105,12 +87,12 @@ export default function Detailed(data) {
       <Footer />
     </div>
   )
-} 
+}
 
 
 Detailed.getInitialProps = async (context) => {
   console.log(context.query.id);
-  
+
   const id = context.query.id;
 
   const promise = new Promise(resolve => {

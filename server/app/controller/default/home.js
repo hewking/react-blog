@@ -34,6 +34,7 @@ class HomeController extends Controller {
     const sql = 'SELECT a.id as id,' +
       'a.title as title,' +
       'a.introduce as introduce,' +
+      'a.article_content as article_content,' +
       "a.addTime as addTime," +
       'a.view_count as view_count,' +
       'b.typeName as typeName ' +
