@@ -7,7 +7,6 @@ import { CalendarOutlined, FolderOutlined, FireOutlined } from '@ant-design/icon
 import Author from '../components/Author';
 import Advert from '../components/Advert';
 import Footer from '../components/Footer';
-import 'markdown-navbar/dist/navbar.css';
 import axios from 'axios';
 
 import { marked, Renderer } from 'marked';
@@ -15,6 +14,8 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai-sublime.css';
 
 import Tocify from '../components/tocify.tsx';
+
+import servicePath from '../config/apiUrl';
 
 export default function Detailed(props) {
 
@@ -99,7 +100,7 @@ Detailed.getInitialProps = async (context) => {
   const id = context.query.id;
 
   const promise = new Promise(resolve => {
-    axios('http://127.0.0.1:7001/default/getArticleById/' + id).then(res => {
+    axios(servicePath.getArticleById + id).then(res => {
       resolve(res.data.data[0]);
     });
   });

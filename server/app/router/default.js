@@ -9,4 +9,5 @@ module.exports = app => {
   // 配置id query 参数
   router.get('/default/getArticleById/:id', controller.default.home.getArticleById);
   router.get('/default/getAriticleList', controller.default.home.getAriticleList);
+  router.get('/default/getTypeInfo', controller.default.home.getTypeInfo);
 };

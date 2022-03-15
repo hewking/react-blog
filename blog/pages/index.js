@@ -11,6 +11,8 @@ import Author from '../components/Author';
 import Advert from '../components/Advert';
 import Footer from '../components/Footer';
 
+import servicePath from '../config/apiUrl';
+
 export default function Home(data) {
 
   const [list, setList] = useState(data.data); 
@@ -56,7 +58,7 @@ export default function Home(data) {
 
 Home.getInitialProps = async () => {
   const promise = new Promise((resolve) => {
-    axios('http://127.0.0.1:7001/default/getAriticleList').then(res => {
+    axios(servicePath.getArticleList).then(res => {
       console.log('------>', res.data);
       resolve(res.data);
     });
