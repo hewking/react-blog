@@ -7,7 +7,6 @@ import { CalendarOutlined, FolderOutlined, FireOutlined } from '@ant-design/icon
 import Author from '../components/Author';
 import Advert from '../components/Advert';
 import Footer from '../components/Footer';
-import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
 import axios from 'axios';
 
