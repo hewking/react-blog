@@ -11,11 +11,30 @@ import Author from '../components/Author';
 import Advert from '../components/Advert';
 import Footer from '../components/Footer';
 
+import { marked, Renderer } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/monokai-sublime.css';
+
 import servicePath from '../config/apiUrl';
 
 export default function Home(data) {
 
   const [list, setList] = useState(data.data); 
+
+  const renderer = new Renderer();
+
+  marked.setOptions({
+    renderer: renderer,
+    gfm: true, // github 样式差不多的md 展示
+    pedantic: false,
+    sanitize: false, // 允许html标签
+    tables: true,
+    breaks: false,
+    smartLists: true,
+    innerHeight: function (code) {
+      return hljs.highlightAuto(code).value;
+    }
+  });
 
   return (
     <div className={styles.container}>
@@ -41,7 +60,8 @@ export default function Home(data) {
                   <span><VideoCameraOutlined />{item.typeName}</span>
                   <span><FireOutlined />{item.view_count}人</span>
                 </div>
-                <div className={listStyles.list_context}>{item.introduce}</div>
+                <div className={listStyles.list_context}
+                dangerouslySetInnerHTML={{__html: marked(item.introduce)}}></div>
               </List.Item>);
             }}
           />

@@ -52,6 +52,24 @@ class HomeController extends Controller {
     this.ctx.body = { data: result };
   }
 
+  async getListById(){
+    const id = this.ctx.params.id;
+
+    const sql = 'SELECT a.id as id,' +
+      'a.title as title,' +
+      'a.introduce as introduce,' +
+      'a.article_content as article_content,' +
+      "a.addTime as addTime," +
+      'a.view_count as view_count,' +
+      'b.typeName as typeName ' +
+      'FROM article a LEFT JOIN type b ON a.type_id = b.id '+
+      'WHERE a.type_id=' + id;
+
+      const result = await this.app.mysql.query(sql);
+
+      this.ctx.body = { data: result };
+  }
+
 }
 
 module.exports = HomeController;

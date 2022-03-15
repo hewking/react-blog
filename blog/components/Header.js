@@ -22,9 +22,6 @@ const Header = () => {
     fetchData();
   }, []); // [] 空数组表示只执行一次，不管什么时候都执行
 
-  console.log('typeArr', typeArr);
-
-
   const handleClick = (e) => {
     if (e.key == 0) {
       Router.push('/');
