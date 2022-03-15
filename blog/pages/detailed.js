@@ -15,11 +15,19 @@ import { marked, Renderer } from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai-sublime.css';
 
+import Tocify from '../components/tocify.tsx';
+
 export default function Detailed(props) {
 
   const { title, addTime, typeName, view_count, introduce, article_content } = props;
 
+  const tocify = new Tocify();
   const renderer = new Renderer();
+
+  renderer.heading = function (text, level, raw) {
+    const anchor = tocify.add(text, level);
+    return `<a id=${anchor} href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
+  };
 
   marked.setOptions({
     renderer: renderer,
@@ -74,11 +82,7 @@ export default function Detailed(props) {
             {/* 这样既可css定义的样式和css modules 定义的样式都生效 */}
             <div className={`comm-box ${detailStyles.detailed_nav}`}>
               <div className={detailStyles.nav_title}>文章目录</div>
-              <MarkNav
-                className={detailStyles.article_menu}
-                source={html}
-                ordered={false}
-              />
+              {tocify && tocify.render()}
             </div>
           </Affix>
 
