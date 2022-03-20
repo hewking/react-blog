@@ -19,7 +19,7 @@ export default function Home() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      navigate("/adminIndex");
+      navigate("/index");
     }, 2000);
   }
 
