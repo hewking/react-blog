@@ -1,11 +1,21 @@
-import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Login from './Login.tsx';
+import React from "react";
+import { BrowserRouter as Router, Route, Link, Routes, Outlet } from "react-router-dom";
+import Login from "./Login";
 
-export default function Main(){
+export default function Main() {
   return (
     <Router>
-      <Route path="/login/" component={Login} />
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="login" element={<Login />} />
+        </Route>
+      </Routes>
     </Router>
-  )
+  );
+}
+
+function App() {
+  return <div>
+    <Outlet/>
+  </div>;
 }
