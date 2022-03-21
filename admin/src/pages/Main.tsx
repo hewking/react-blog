@@ -16,7 +16,7 @@ export default function Main() {
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="index" element={<AdminIndex />}>
-          <Route path="add" element={<AddArticle />} />
+          <Route path="addArticle" element={<AddArticle />} />
         </Route>
       </Routes>
     </Router>

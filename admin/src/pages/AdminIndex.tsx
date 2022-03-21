@@ -57,7 +57,6 @@ export default function AdminIndex() {
             <div>
               <Outlet/>
             </div>
-            博客工作台.
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>hewking.top</Footer>
