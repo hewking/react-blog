@@ -26,7 +26,7 @@ export function AddArticle() {
   const [showDate, setShowDate] = useState(""); //发布日期
   const [updateDate, setUpdateDate] = useState(); //修改日志的日期
   const [typeInfo, setTypeInfo] = useState<TypeInfo[]>([]); // 文章类别信息
-  const [selectedType, setSelectType] = useState("选择文章类别"); //选择的文章类别
+  const [selectedType, setSelectType] = useState(""); //选择的文章类别
 
   const navigate = useNavigate();
 
@@ -98,7 +98,37 @@ export function AddArticle() {
       message.error('请选择发布日期');
       return false;
     }
-    message.success('校验通过');
+
+    const dataProps = {}
+    dataProps['title'] = articleTitle;
+    dataProps['article_content'] = articleContent;
+    dataProps['introduce'] = introducemd;
+    dataProps['type_id'] = selectedType;
+    const dateText = showDate.replace('-', '/');
+    dataProps['addTime'] = new Date(dateText).getTime() / 1000;
+
+    // 意味着文章是新增的
+    if (articleId === 0) {
+      dataProps['view_count'] = 0;
+      axios({
+        method: "post",
+        url: servicePath.addArticle,
+        withCredentials: true,
+        data: dataProps,
+      }).then(res => {
+        if (res.data.isSuccess) {
+          message.success('文章发布成功');
+          setArticleId(res.data.insertId);
+        } else {
+          message.error('文章发布失败');
+        }
+      }).catch(err => {
+        message.error(err.message);
+      });
+    } else {
+      // 不等于0 为修改的文章
+    }
+
   }
 
 
@@ -113,12 +143,13 @@ export function AddArticle() {
               &nbsp;
             </Col>
             <Col span={4}>
-              <Select defaultValue={selectedType} size="large" onSelect={(value, option) => {
+              <Select defaultValue={selectedType || '选择文章类别'} size="large" onChange={(value, option) => {
+                console.log('没执行吗',value, option);
                 setSelectType(value);
               }}>
                 {
                   typeInfo.map((item: TypeInfo, index) => {
-                    return  <Option value={item.id} >{item.typeName}</Option>
+                    return  <Option value={item.id} key={item.id}>{item.typeName}</Option>
                   })
                 }
               </Select>

@@ -42,6 +42,24 @@ class MainController extends Controller {
 
   }
 
+  async addArticle() {
+    const tmp = this.ctx.request.body;
+    const result = await this.app.mysql.insert('article', tmp);
+    const insertSuccess = result.affectedRows === 1;
+    const insertId = result.insertId;
+    if (insertSuccess) {
+      result.inser
+      this.ctx.body = {
+        'isSuccess': true,
+        'insertId': insertId
+      }
+    } else {
+      this.ctx.body = {
+        'isSuccess': false,
+      }
+    }
+  }
+
 }
 
 module.exports = MainController;

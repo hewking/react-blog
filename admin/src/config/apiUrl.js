@@ -4,6 +4,7 @@ let ipUrl = 'http://localhost:7001/admin/'
 let servicePath = {
   checkLogin: ipUrl + 'checkLogin',
   getTypeInfo: ipUrl + 'getTypeInfo',
+  addArticle: ipUrl + 'addArticle',
 }
 
 export default servicePath;
