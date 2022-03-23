@@ -9,6 +9,7 @@ import {
 import AdminIndex from "./AdminIndex";
 import Login from "./Login";
 import { AddArticle } from "./AddArticle";
+import ArticleList from "./ArticleList";
 
 export default function Main() {
   return (
@@ -17,6 +18,7 @@ export default function Main() {
         <Route path="/" element={<Login />} />
         <Route path="index" element={<AdminIndex />}>
           <Route path="addArticle" element={<AddArticle />} />
+          <Route path="articleList" element={<ArticleList/>}/>
         </Route>
       </Routes>
     </Router>

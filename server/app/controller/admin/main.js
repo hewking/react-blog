@@ -62,6 +62,7 @@ class MainController extends Controller {
 
   async updateArticle() {
     const tmp = this.ctx.request.body;
+    //自动会通过tmp 的id 主键更新
     const result = await this.app.mysql.update('article', tmp);
     const updateSuccess = result.affectedRows === 1;
     this.ctx.body = {
