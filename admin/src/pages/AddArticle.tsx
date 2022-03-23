@@ -23,7 +23,7 @@ export function AddArticle() {
   const [markdownContent, setMarkdownContent] = useState("预览内容"); //html内容
   const [introducemd, setIntroducemd] = useState(); //简介的markdown内容
   const [introducehtml, setIntroducehtml] = useState("等待编辑"); //简介的html内容
-  const [showDate, setShowDate] = useState(); //发布日期
+  const [showDate, setShowDate] = useState(""); //发布日期
   const [updateDate, setUpdateDate] = useState(); //修改日志的日期
   const [typeInfo, setTypeInfo] = useState<TypeInfo[]>([]); // 文章类别信息
   const [selectedType, setSelectType] = useState("选择文章类别"); //选择的文章类别
@@ -55,6 +55,10 @@ export function AddArticle() {
     setIntroducehtml(html);
   }
 
+  const handleTitleChange = (e) => {
+    setArticleTitle(e.target.value);
+  };
+
   const getTypeInfo = () => {
     axios({
       method: "get",
@@ -77,6 +81,26 @@ export function AddArticle() {
     getTypeInfo();
   }, []);
 
+  const saveArticle = () => {
+    if (!selectedType) {
+      message.error('请选择文章类别');
+      return false;
+    } else if (!articleTitle) {
+      message.error('请填写文章标题');
+      return false;
+    }else if (!articleContent) {
+      message.error('请填写文章内容');
+      return false;
+    }else if(!introducemd){
+      message.error('请填写简介');
+      return false;
+    }else if (!showDate) {
+      message.error('请选择发布日期');
+      return false;
+    }
+    message.success('校验通过');
+  }
+
 
   return (
     <div>
@@ -85,7 +109,7 @@ export function AddArticle() {
         <Col span={18}>
           <Row gutter={10}>
             <Col span={20}>
-              <Input placeholder="博客标题" size="large" />
+              <Input placeholder="博客标题" size="large" onChange={handleTitleChange}/>
               &nbsp;
             </Col>
             <Col span={4}>
@@ -119,7 +143,7 @@ export function AddArticle() {
           <Row>
             <Col span={24}>
               <Button size="large">暂存文章</Button>&nbsp;
-              <Button size="large" type="primary">
+              <Button size="large" type="primary" onClick={saveArticle}>
                 发布文章
               </Button>
               <br />
@@ -133,7 +157,9 @@ export function AddArticle() {
             </Col>
             <Col span={12}>
               <div className="date-select">
-                <DatePicker placeholder="发布日期" size="large" />
+                <DatePicker placeholder="发布日期" size="large" onChange={(dateType, dateString) => {
+                  setShowDate(dateString);
+                }}/>
               </div>
             </Col>
           </Row>
