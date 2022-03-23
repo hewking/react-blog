@@ -79,8 +79,7 @@ class MainController extends Controller {
       'a.title as title,' +
       'a.introduce as introduce,' +
       // 时间戳转换为日期
-      // "FROM_UNIXTME(a.addTime, '%Y-%m-%d %H:%i:%s') as addTime," +
-      "a.addTime as addTime," +
+      "FROM_UNIXTIME(a.addTime, '%Y-%m-%d %H:%i:%s') as addTime," +
       'a.view_count as view_count,' +
       'b.typeName as typeName ' +
       'FROM article a LEFT JOIN type b ON a.type_id = b.id' + 
@@ -97,6 +96,26 @@ class MainController extends Controller {
     ctx.body = {
       'isSuccess': result.affectedRows === 1
     }
+  }
+
+  async getArticleById(){
+
+    let id = this.ctx.params.id;
+
+    const sql = 'SELECT a.id as id,' +
+      'a.title as title,' +
+      'a.introduce as introduce,' +
+      "FROM_UNIXTIME(a.addTime, '%Y-%m-%d %H:%i:%s') as addTime," +
+      'a.view_count as view_count,' +
+      'b.typeName as typeName ' +
+      'a.type_id as type_id' +
+      'FROM article a LEFT JOIN type b ON a.type_id = b.id '+
+      'WHERE a.id=' + id;
+
+      const result = await this.app.mysql.query(sql);
+
+      this.ctx.body = { data: result };
+
   }
 
 }
