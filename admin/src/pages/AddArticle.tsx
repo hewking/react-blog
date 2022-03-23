@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { marked, Renderer } from 'marked';
+import { marked, Renderer } from "marked";
 import "../static/css/AddArticle.css";
 import { Row, Col, Input, Select, Button, DatePicker, message } from "antd";
 import axios from "axios";
@@ -40,20 +40,20 @@ export function AddArticle() {
     tables: true,
     breaks: false,
     smartLists: true,
-    smartypants: false
+    smartypants: false,
   });
 
   const changeContent = (e) => {
     setArticleContent(e.target.value);
     const html = marked(e.target.value);
     setMarkdownContent(html);
-  }
+  };
 
   const changeIntroduce = (e) => {
     setIntroducemd(e.target.value);
     const html = marked(e.target.value);
     setIntroducehtml(html);
-  }
+  };
 
   const handleTitleChange = (e) => {
     setArticleTitle(e.target.value);
@@ -64,18 +64,20 @@ export function AddArticle() {
       method: "get",
       url: servicePath.getTypeInfo,
       withCredentials: true,
-    }).then(res => {
-      const data = res.data.data;
-      if (data == '没有登录'){
-        navigate('/');
-        localStorage.removeItem('openId');
-      }else {
-        setTypeInfo(res.data.data);
-      }
-    }).catch(err => {
-      message.error('获取文章类别信息失败');
-    });
-  }
+    })
+      .then((res) => {
+        const data = res.data.data;
+        if (data == "没有登录") {
+          navigate("/");
+          localStorage.removeItem("openId");
+        } else {
+          setTypeInfo(res.data.data);
+        }
+      })
+      .catch((err) => {
+        message.error("获取文章类别信息失败");
+      });
+  };
 
   useEffect(() => {
     getTypeInfo();
@@ -83,54 +85,71 @@ export function AddArticle() {
 
   const saveArticle = () => {
     if (!selectedType) {
-      message.error('请选择文章类别');
+      message.error("请选择文章类别");
       return false;
     } else if (!articleTitle) {
-      message.error('请填写文章标题');
+      message.error("请填写文章标题");
       return false;
-    }else if (!articleContent) {
-      message.error('请填写文章内容');
+    } else if (!articleContent) {
+      message.error("请填写文章内容");
       return false;
-    }else if(!introducemd){
-      message.error('请填写简介');
+    } else if (!introducemd) {
+      message.error("请填写简介");
       return false;
-    }else if (!showDate) {
-      message.error('请选择发布日期');
+    } else if (!showDate) {
+      message.error("请选择发布日期");
       return false;
     }
 
-    const dataProps = {}
-    dataProps['title'] = articleTitle;
-    dataProps['article_content'] = articleContent;
-    dataProps['introduce'] = introducemd;
-    dataProps['type_id'] = selectedType;
-    const dateText = showDate.replace('-', '/');
-    dataProps['addTime'] = new Date(dateText).getTime() / 1000;
+    const dataProps = {};
+    dataProps["title"] = articleTitle;
+    dataProps["article_content"] = articleContent;
+    dataProps["introduce"] = introducemd;
+    dataProps["type_id"] = selectedType;
+    const dateText = showDate.replace("-", "/");
+    dataProps["addTime"] = new Date(dateText).getTime() / 1000;
 
     // 意味着文章是新增的
     if (articleId === 0) {
-      dataProps['view_count'] = 0;
+      dataProps["view_count"] = 0;
       axios({
         method: "post",
         url: servicePath.addArticle,
         withCredentials: true,
         data: dataProps,
-      }).then(res => {
-        if (res.data.isSuccess) {
-          message.success('文章发布成功');
-          setArticleId(res.data.insertId);
-        } else {
-          message.error('文章发布失败');
-        }
-      }).catch(err => {
-        message.error(err.message);
-      });
+      })
+        .then((res) => {
+          if (res.data.isSuccess) {
+            message.success("文章发布成功");
+            setArticleId(res.data.insertId);
+          } else {
+            message.error("文章发布失败");
+          }
+        })
+        .catch((err) => {
+          message.error(err.message);
+        });
     } else {
       // 不等于0 为修改的文章
+      dataProps["id"] = articleId;
+      axios({
+        method: "post",
+        data: dataProps,
+        url: servicePath.updateArticle,
+        withCredentials: true,
+      })
+        .then((res) => {
+          if (res.data.isSuccess) {
+            message.success("文章修改成功");
+          } else {
+            message.error("文章修改失败");
+          }
+        })
+        .catch((err) => {
+          message.error(err.message);
+        });
     }
-
-  }
-
+  };
 
   return (
     <div>
@@ -139,19 +158,29 @@ export function AddArticle() {
         <Col span={18}>
           <Row gutter={10}>
             <Col span={20}>
-              <Input placeholder="博客标题" size="large" onChange={handleTitleChange}/>
+              <Input
+                placeholder="博客标题"
+                size="large"
+                onChange={handleTitleChange}
+              />
               &nbsp;
             </Col>
             <Col span={4}>
-              <Select defaultValue={selectedType || '选择文章类别'} size="large" onChange={(value, option) => {
-                console.log('没执行吗',value, option);
-                setSelectType(value);
-              }}>
-                {
-                  typeInfo.map((item: TypeInfo, index) => {
-                    return  <Option value={item.id} key={item.id}>{item.typeName}</Option>
-                  })
-                }
+              <Select
+                defaultValue={selectedType || "选择文章类别"}
+                size="large"
+                onChange={(value, option) => {
+                  console.log("没执行吗", value, option);
+                  setSelectType(value);
+                }}
+              >
+                {typeInfo.map((item: TypeInfo, index) => {
+                  return (
+                    <Option value={item.id} key={item.id}>
+                      {item.typeName}
+                    </Option>
+                  );
+                })}
               </Select>
             </Col>
           </Row>
@@ -165,8 +194,10 @@ export function AddArticle() {
               ></TextArea>
             </Col>
             <Col span={12}>
-              <div className="show-html"
-              dangerouslySetInnerHTML={{__html:markdownContent}}></div>
+              <div
+                className="show-html"
+                dangerouslySetInnerHTML={{ __html: markdownContent }}
+              ></div>
             </Col>
           </Row>
         </Col>
@@ -181,16 +212,27 @@ export function AddArticle() {
             </Col>
             <Col span={24}>
               <br />
-              <TextArea rows={4} placeholder="文章摘要" onChange={changeIntroduce}></TextArea>
+              <TextArea
+                rows={4}
+                placeholder="文章摘要"
+                onChange={changeIntroduce}
+              ></TextArea>
               <br />
               <br />
-              <div className="introduce-html" dangerouslySetInnerHTML={{__html: introducehtml}}></div>
+              <div
+                className="introduce-html"
+                dangerouslySetInnerHTML={{ __html: introducehtml }}
+              ></div>
             </Col>
             <Col span={12}>
               <div className="date-select">
-                <DatePicker placeholder="发布日期" size="large" onChange={(dateType, dateString) => {
-                  setShowDate(dateString);
-                }}/>
+                <DatePicker
+                  placeholder="发布日期"
+                  size="large"
+                  onChange={(dateType, dateString) => {
+                    setShowDate(dateString);
+                  }}
+                />
               </div>
             </Col>
           </Row>

@@ -17,13 +17,13 @@ class MainController extends Controller {
     const result = await this.app.mysql.query(sql);
     if (result.length > 0) {
       let openId = new Date().getTime();
-      this.ctx.session.openId = {'openId': openId};
+      this.ctx.session.openId = { 'openId': openId };
       this.ctx.body = {
-        'data':'登录成功','openId':openId
+        'data': '登录成功', 'openId': openId
       };
     } else {
       this.ctx.body = {
-        'data':'登录失败'
+        'data': '登录失败'
       };
     }
   }
@@ -32,11 +32,11 @@ class MainController extends Controller {
     const results = await this.app.mysql.select('type');
     if (results.length > 0) {
       this.ctx.body = {
-        'data':results
+        'data': results
       };
     } else {
       this.ctx.body = {
-        'data':'没有数据'
+        'data': '没有数据'
       }
     }
 
@@ -58,6 +58,16 @@ class MainController extends Controller {
         'isSuccess': false,
       }
     }
+  }
+
+  async updateArticle() {
+    const tmp = this.ctx.request.body;
+    const result = await this.app.mysql.update('article', tmp);
+    const updateSuccess = result.affectedRows === 1;
+    this.ctx.body = {
+      'isSuccess': updateSuccess,
+    }
+
   }
 
 }
