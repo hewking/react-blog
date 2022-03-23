@@ -105,10 +105,11 @@ class MainController extends Controller {
     const sql = 'SELECT a.id as id,' +
       'a.title as title,' +
       'a.introduce as introduce,' +
+      'a.article_content as article_content,' +
       "FROM_UNIXTIME(a.addTime, '%Y-%m-%d %H:%i:%s') as addTime," +
       'a.view_count as view_count,' +
-      'b.typeName as typeName ' +
-      'a.type_id as type_id' +
+      'b.typeName as typeName, ' +
+      'b.id as type_id ' +
       'FROM article a LEFT JOIN type b ON a.type_id = b.id '+
       'WHERE a.id=' + id;
 

@@ -4,7 +4,7 @@ import "../static/css/AddArticle.css";
 import { Row, Col, Input, Select, Button, DatePicker, message } from "antd";
 import axios from "axios";
 import servicePath from "../config/apiUrl";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -16,12 +16,12 @@ interface TypeInfo {
   icon: String;
 }
 
-export function AddArticle() {
+export function AddArticle(props) {
   const [articleId, setArticleId] = useState(0); // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
   const [articleTitle, setArticleTitle] = useState(""); //文章标题
   const [articleContent, setArticleContent] = useState(""); //markdown的编辑内容
   const [markdownContent, setMarkdownContent] = useState("预览内容"); //html内容
-  const [introducemd, setIntroducemd] = useState(); //简介的markdown内容
+  const [  introducemd, setIntroducemd] = useState(); //简介的markdown内容
   const [introducehtml, setIntroducehtml] = useState("等待编辑"); //简介的html内容
   const [showDate, setShowDate] = useState(""); //发布日期
   const [updateDate, setUpdateDate] = useState(); //修改日志的日期
@@ -79,8 +79,15 @@ export function AddArticle() {
       });
   };
 
+  const {id} = useParams();
+
   useEffect(() => {
     getTypeInfo();
+    // 获取文章ID
+    if (id) {
+      setArticleId(Number(id));
+      getArticleById(id);
+    }
   }, []);
 
   const saveArticle = () => {
@@ -151,6 +158,31 @@ export function AddArticle() {
     }
   };
 
+  const getArticleById = (id) => {
+    axios({
+      method: "get",
+      url: servicePath.getArticleById + id,
+      withCredentials: true,
+    })
+      .then((res) => {
+        const data = res.data.data[0];
+        console.log('data:', data);
+        setArticleId(data.id);
+        setArticleTitle(data.title);
+        setArticleContent(data.article_content);
+        setIntroducemd(data.introduce);
+        setShowDate(data.addTime);
+        setSelectType(data.type_id);
+        const html = marked(data.article_content);
+        setMarkdownContent(html);
+        const html2 = marked(data.introduce);
+        setIntroducehtml(html2);
+      })
+      .catch((err) => {
+        message.error("获取文章信息失败");
+      });
+  }
+
   return (
     <div>
       {/* gutter 间距 */}
@@ -162,6 +194,7 @@ export function AddArticle() {
                 placeholder="博客标题"
                 size="large"
                 onChange={handleTitleChange}
+                value={articleTitle}
               />
               &nbsp;
             </Col>
@@ -190,6 +223,7 @@ export function AddArticle() {
                 className="markdown-content"
                 rows={35}
                 placeholder="文章内容"
+                value={articleContent}
                 onChange={changeContent}
               ></TextArea>
             </Col>
@@ -216,6 +250,7 @@ export function AddArticle() {
                 rows={4}
                 placeholder="文章摘要"
                 onChange={changeIntroduce}
+                value={introducemd}
               ></TextArea>
               <br />
               <br />

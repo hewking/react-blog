@@ -4,6 +4,7 @@ import axios from "axios";
 import servicePath from "../config/apiUrl";
 import "antd/dist/antd.css";
 import "../static/css/ArticleList.css";
+import { useNavigate } from "react-router-dom";
 
 const { confirm } = Modal;
 interface Article {
@@ -17,6 +18,8 @@ interface Article {
 
 export default function ArticleList() {
   const [list, setList] = useState<Article[]>([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios({
@@ -56,6 +59,10 @@ export default function ArticleList() {
     });
   };
 
+  const updateArticle = (id: number) => {
+    navigate('/index/addArticle/' + id);
+  }
+
   return (
     <div>
       <List
@@ -67,7 +74,7 @@ export default function ArticleList() {
             <Col span={2}>
               <b>类别</b>
             </Col>
-            <Col span={4}>
+            <Col span={3}>
               <b>添加时间</b>
             </Col>
             <Col span={4}>
@@ -90,14 +97,16 @@ export default function ArticleList() {
                 <Col span={4}>{item.addTime}</Col>
                 <Col span={4}>{item.view_count}</Col>
                 <Col span={4}>
-                  <Button type="primary">修改</Button>
+                  <Button type="primary" onClick={() => {
+                    updateArticle(item.id)
+                  }}>修改</Button>
                   &nbsp;
                   <Button
                     onClick={() => {
                       deleteArticle(item.id);
                     }}
                   >
-                    删除{" "}
+                    删除
                   </Button>
                 </Col>
               </Row>
