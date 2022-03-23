@@ -71,6 +71,25 @@ class MainController extends Controller {
 
   }
 
+  async getAriticleList() {
+    const { ctx } = this;
+
+    // 查询文章列表，通过左连接查询
+    const sql = 'SELECT a.id as id,' +
+      'a.title as title,' +
+      'a.introduce as introduce,' +
+      // 时间戳转换为日期
+      // "FROM_UNIXTME(a.addTime, '%Y-%m-%d %H:%i:%s') as addTime," +
+      "a.addTime as addTime," +
+      'a.view_count as view_count,' +
+      'b.typeName as typeName ' +
+      'FROM article a LEFT JOIN type b ON a.type_id = b.id' + 
+      ' ORDER BY a.id DESC';
+
+    const results = await ctx.app.mysql.query(sql);
+    ctx.body = { data: results };
+  }
+
 }
 
 module.exports = MainController;

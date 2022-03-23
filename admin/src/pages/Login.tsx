@@ -9,7 +9,6 @@ import {
 import "../static/css/login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ServicePath from "../config/apiUrl";
 import servicePath from "../config/apiUrl";
 
 export default function Home() {

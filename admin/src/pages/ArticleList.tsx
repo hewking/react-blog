@@ -2,20 +2,38 @@ import React, { useState, useEffect } from "react";
 import { Button, Row, Col, Modal, message, List } from "antd";
 import axios from "axios";
 import servicePath from "../config/apiUrl";
+import '../static/css/ArticleList.css';
+import "antd/dist/antd.css";
 
 const { confirm } = Modal;
 
 interface Article {
   id: number;
-  typeId: number;
   title: string;
   introduce: string;
-  articleContent: string;
   view_count: number;
+  typeName: string;
+  addTime: number;
 }
 
 export default function ArticleList() {
   const [list, setList] = useState<Article[]>([]);
+
+  useEffect(() => {
+
+    axios({
+      method: "get",
+      withCredentials: true,
+      url: servicePath.getAriticleList,
+    }).then(
+      res => {
+        setList(res.data.data);
+      }
+    ).catch(err => {
+      message.error(err.message);
+    })
+
+  }, []);
 
   return (
     <div>
@@ -36,7 +54,8 @@ export default function ArticleList() {
             </Col>
           </Row>
         }
-        bordered
+        itemLayout="vertical"
+        bordered={true}
         dataSource={list}
         renderItem={(item) => {
           return <Row className="list-div">
@@ -44,14 +63,15 @@ export default function ArticleList() {
               {item.title}
             </Col>
             <Col span={4}>
-              {item.typeId}
+              {item.typeName}
             </Col>
             <Col span={4}>
               {item.view_count}
             </Col>
             <Col span={4}>
               <Button type="primary">修改</Button>
-              <Button type="primary">删除</Button>
+              &nbsp;
+              <Button >删除 </Button>
             </Col>
           </Row>
         }}
