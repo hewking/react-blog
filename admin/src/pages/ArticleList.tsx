@@ -4,6 +4,7 @@ import axios from "axios";
 import servicePath from "../config/apiUrl";
 import '../static/css/ArticleList.css';
 import "antd/dist/antd.css";
+import { on } from "process";
 
 const { confirm } = Modal;
 
@@ -34,6 +35,30 @@ export default function ArticleList() {
     })
 
   }, []);
+
+  const deleteArticle = (id: number) => {
+    confirm({
+      title: "确定要删除这篇文章吗？",
+      content:'如果你点击OK按钮，文章将会永远被删除，无法恢复。',
+      onOk() {
+        axios({
+          method: "get",
+          withCredentials: true,
+          url: servicePath.deleteArticle + id,
+        }).then(
+          res => {
+            message.success("文章删除成功");
+            setList(list.filter(item => item.id !== id));
+          }
+        ).catch(err => {
+          message.error(err.message);
+        })
+      },
+      onCancel() {
+        message.success("操作已取消");
+      }
+    })
+  }
 
   return (
     <div>
@@ -71,7 +96,9 @@ export default function ArticleList() {
             <Col span={4}>
               <Button type="primary">修改</Button>
               &nbsp;
-              <Button >删除 </Button>
+              <Button onClick={() => {
+                deleteArticle(item.id);
+              }}>删除 </Button>
             </Col>
           </Row>
         }}

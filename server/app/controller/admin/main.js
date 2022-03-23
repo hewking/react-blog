@@ -90,6 +90,15 @@ class MainController extends Controller {
     ctx.body = { data: results };
   }
 
+  async deleteArticle() {
+    const { ctx } = this;
+    const id = this.ctx.params.id;
+    const result = await ctx.app.mysql.delete('article', { id });
+    ctx.body = {
+      'isSuccess': result.affectedRows === 1
+    }
+  }
+
 }
 
 module.exports = MainController;
