@@ -18,3 +18,5 @@ exports.cors = {
   enable: true,
   package: 'egg-cors',
 }
+
+exports.session = true; // enable by default

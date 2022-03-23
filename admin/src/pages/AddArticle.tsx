@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { marked, Renderer } from 'marked';
 import "../static/css/AddArticle.css";
-import { Row, Col, Input, Select, Button, DatePicker } from "antd";
+import { Row, Col, Input, Select, Button, DatePicker, message } from "antd";
+import axios from "axios";
+import servicePath from "../config/apiUrl";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 const { TextArea } = Input;
+
+interface TypeInfo {
+  typeName: String;
+  id: number;
+  orderNum: number;
+  icon: String;
+}
 
 export function AddArticle() {
   const [articleId, setArticleId] = useState(0); // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
@@ -15,8 +25,10 @@ export function AddArticle() {
   const [introducehtml, setIntroducehtml] = useState("等待编辑"); //简介的html内容
   const [showDate, setShowDate] = useState(); //发布日期
   const [updateDate, setUpdateDate] = useState(); //修改日志的日期
-  const [typeInfo, setTypeInfo] = useState([]); // 文章类别信息
-  const [selectedType, setSelectType] = useState(1); //选择的文章类别
+  const [typeInfo, setTypeInfo] = useState<TypeInfo[]>([]); // 文章类别信息
+  const [selectedType, setSelectType] = useState("选择文章类别"); //选择的文章类别
+
+  const navigate = useNavigate();
 
   const renderer = new Renderer();
 
@@ -43,6 +55,28 @@ export function AddArticle() {
     setIntroducehtml(html);
   }
 
+  const getTypeInfo = () => {
+    axios({
+      method: "get",
+      url: servicePath.getTypeInfo,
+      withCredentials: true,
+    }).then(res => {
+      const data = res.data.data;
+      if (data == '没有登录'){
+        navigate('/');
+        localStorage.removeItem('openId');
+      }else {
+        setTypeInfo(res.data.data);
+      }
+    }).catch(err => {
+      message.error('获取文章类别信息失败');
+    });
+  }
+
+  useEffect(() => {
+    getTypeInfo();
+  }, []);
+
 
   return (
     <div>
@@ -55,8 +89,14 @@ export function AddArticle() {
               &nbsp;
             </Col>
             <Col span={4}>
-              <Select defaultValue="1" size="large">
-                <Option value="1">视频教程</Option>
+              <Select defaultValue={selectedType} size="large" onSelect={(value, option) => {
+                setSelectType(value);
+              }}>
+                {
+                  typeInfo.map((item: TypeInfo, index) => {
+                    return  <Option value={item.id} >{item.typeName}</Option>
+                  })
+                }
               </Select>
             </Col>
           </Row>
