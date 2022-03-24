@@ -94,7 +94,7 @@ export default function ArticleList() {
               <Row className="list-div">
                 <Col span={8}>{item.title}</Col>
                 <Col span={2}>{item.typeName}</Col>
-                <Col span={4}>{item.addTime}</Col>
+                <Col span={3}>{item.addTime}</Col>
                 <Col span={4}>{item.view_count}</Col>
                 <Col span={4}>
                   <Button type="primary" onClick={() => {

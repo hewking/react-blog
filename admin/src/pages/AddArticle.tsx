@@ -203,7 +203,6 @@ export function AddArticle(props) {
                 defaultValue={selectedType || "选择文章类别"}
                 size="large"
                 onChange={(value, option) => {
-                  console.log("没执行吗", value, option);
                   setSelectType(value);
                 }}
               >
