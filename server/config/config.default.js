@@ -53,7 +53,8 @@ module.exports = appInfo => {
 
   // 配置进行跨域
   config.cors = {
-    origin: 'http://localhost:3000',
+    // 注释origin 则允许所有host跨域，允许security 的domainWhiteList 的跨域
+    // origin: 'http://localhost:3000',
     credentials:true, // 允许cookie 跨域
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   }
