@@ -21,9 +21,10 @@
   "homepage": "https://github.com/hewking/react-blog#readme",
   "workspaces": [
     "packages/blog",
-    "packages/server",
     "packages/admin"
   ],
-  "private ": true
+  "private ": true,
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
 }
-
