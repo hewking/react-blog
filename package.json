@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/hewking/react-blog#readme",
   "workspaces": [
-    "packages/*"
+    "packages/blog",
+    "packages/server",
+    "packages/admin"
   ],
   "private ": true
 }
+
