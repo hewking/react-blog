@@ -47,7 +47,7 @@ export default function Detailed(props) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Detailed</title>
+        <title>{title}</title>
       </Head>
       <Header />
       <Row type="flex" justify='center' className='comm-main'>
@@ -56,8 +56,8 @@ export default function Detailed(props) {
             <div className={detailStyles.bread_div}>
               <Breadcrumb>
                 <Breadcrumb.Item><a href='/'>首页</a></Breadcrumb.Item>
-                <Breadcrumb.Item><a href='/'>视频教程</a></Breadcrumb.Item>
-                <Breadcrumb.Item><a href=''>博客详情</a></Breadcrumb.Item>
+                <Breadcrumb.Item><a href='/'>{typeName}</a></Breadcrumb.Item>
+                <Breadcrumb.Item><a href=''>{title}</a></Breadcrumb.Item>
               </Breadcrumb>
             </div>
             <div>
