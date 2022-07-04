@@ -1,0 +1,15 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1,
+    "workspacePrefix": "E:\\private_project\\react-blog"
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_CANNOT_REMOVE_MISSING_DEPS",
+    "err": {
+      "name": "pnpm",
+      "message": "Cannot remove '@mono/utils': project has no dependencies of any kind",
+      "code": "ERR_PNPM_CANNOT_REMOVE_MISSING_DEPS",
+      "stack": "pnpm: Cannot remove '@mono/utils': project has no dependencies of any kind\n    at Object.handler (D:\\software\\nvm\\v16.13.2\\node_modules\\pnpm\\dist\\pnpm.cjs:128765:15)\n    at async D:\\software\\nvm\\v16.13.2\\node_modules\\pnpm\\dist\\pnpm.cjs:192593:21\n    at async run (D:\\software\\nvm\\v16.13.2\\node_modules\\pnpm\\dist\\pnpm.cjs:192567:34)\n    at async runPnpm (D:\\software\\nvm\\v16.13.2\\node_modules\\pnpm\\dist\\pnpm.cjs:192785:5)\n    at async D:\\software\\nvm\\v16.13.2\\node_modules\\pnpm\\dist\\pnpm.cjs:192777:7"
+    }
+  }
+}

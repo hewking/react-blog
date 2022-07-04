@@ -4,6 +4,7 @@
   "description": "react-blog",
   "main": "index.js",
   "scripts": {
+    "dev:blog": "pnpm start --filter \"blog\"",
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,12 +22,5 @@
     "url": "https://github.com/hewking/react-blog/issues"
   },
   "homepage": "https://github.com/hewking/react-blog#readme",
-  "workspaces": [
-    "packages/blog",
-    "packages/admin"
-  ],
-  "private ": true,
-  "devDependencies": {
-    "lerna": "^4.0.0"
-  }
+  "private ": true
 }
