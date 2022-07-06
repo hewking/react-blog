@@ -22,10 +22,10 @@
     "packages/*/{src,types}/**/*.ts": [
       "eslint --cache --fix"
     ],
-    "packages/**/*.d.ts": [
+    "packages/*/{src,types}/**/*.js": [
       "eslint --cache --fix"
     ],
-    "playground/**/__tests__/**/*.ts": [
+    "packages/**/*.d.ts": [
       "eslint --cache --fix"
     ]
   },
@@ -48,6 +48,7 @@
     "lint-staged": "^13.0.3",
     "picocolors": "^1.0.0",
     "prettier": "^2.7.1",
-    "simple-git-hooks": "^2.8.0"
+    "simple-git-hooks": "^2.8.0",
+    "tsx": "^3.7.1"
   }
 }
