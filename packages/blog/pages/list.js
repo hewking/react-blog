@@ -46,7 +46,7 @@ export default function MyList(data) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>List</title>
+        <title>博客列表</title>
       </Head>
       <Header />
       <Row type="flex" justify='center' className='comm-main'>
@@ -54,11 +54,11 @@ export default function MyList(data) {
           <div className='bread-div' >
             <Breadcrumb>
               <Breadcrumb.Item><a href='/'>首页</a></Breadcrumb.Item>
-              <Breadcrumb.Item><a >视频教程</a></Breadcrumb.Item>
+              <Breadcrumb.Item><a >{list && list.length > 0 && list[0].typeName}</a></Breadcrumb.Item>
             </Breadcrumb>
           </div>
           <List
-            header={<div cla>最新日志</div>}
+            header={<div>最新日志</div>}
             itemLayout="vertical"
             dataSource={list}
             renderItem={item => {
