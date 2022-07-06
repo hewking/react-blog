@@ -19,10 +19,7 @@
     "*": [
       "prettier --write --cache --ignore-unknown"
     ],
-    "packages/*/{src,types}/**/*.ts": [
-      "eslint --cache --fix"
-    ],
-    "packages/*/{src,types}/**/*.js": [
+    "packages/*/{src,types}/**/*.{ts,js,json,tsx}": [
       "eslint --cache --fix"
     ],
     "packages/**/*.d.ts": [
