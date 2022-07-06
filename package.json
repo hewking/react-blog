@@ -7,7 +7,7 @@
     "dev:blog": "pnpm --filter blog dev",
     "dev:admin": "pnpm -F admin start",
     "dev:server": "pnpm -F service dev",
-    "test-eslint": "eslint src/**/*.js src/**/*.jsx",
+    "lint": "eslint --cache packages/*/{src,app,types,__tests__}/**",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
