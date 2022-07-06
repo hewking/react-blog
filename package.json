@@ -4,9 +4,9 @@
   "description": "react-blog",
   "main": "index.js",
   "scripts": {
-    "dev:blog": "pnpm start --filter \"blog\"",
-    "bootstrap": "lerna bootstrap",
-    "clean": "lerna clean",
+    "dev:blog": "pnpm --filter blog dev",
+    "dev:admin":"pnpm -F admin start",
+    "dev:server":"pnpm -F service dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
