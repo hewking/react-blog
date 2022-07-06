@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev:blog": "pnpm --filter blog dev",
-    "dev:admin":"pnpm -F admin start",
-    "dev:server":"pnpm -F service dev",
+    "dev:admin": "pnpm -F admin start",
+    "dev:server": "pnpm -F service dev",
+    "test-eslint": "eslint src/**/*.js src/**/*.jsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,8 @@
     "url": "https://github.com/hewking/react-blog/issues"
   },
   "homepage": "https://github.com/hewking/react-blog#readme",
-  "private ": true
+  "private ": true,
+  "dependencies": {
+    "eslint": "^8.19.0"
+  }
 }
