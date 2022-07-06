@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "../static/css/AdminIndex.css";
-import {Outlet, Route, useNavigate} from 'react-router-dom';
+import { Outlet, Route, useNavigate } from "react-router-dom";
 import { AddArticle } from "./AddArticle";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -26,12 +26,12 @@ export default function AdminIndex() {
   };
 
   const handleMenuClick = (e) => {
-    if (e.key === '4') {
+    if (e.key === "4") {
       navigate("/index/articleList");
     } else {
       navigate("/index/addArticle");
     }
-  }
+  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -45,8 +45,12 @@ export default function AdminIndex() {
             添加文章
           </Menu.Item>
           <SubMenu key="sub1" icon={<UserOutlined />} title="文章管理">
-            <Menu.Item key="3" onClick={handleMenuClick}>添加文章</Menu.Item>
-            <Menu.Item key="4" onClick={handleMenuClick}>文章列表</Menu.Item>
+            <Menu.Item key="3" onClick={handleMenuClick}>
+              添加文章
+            </Menu.Item>
+            <Menu.Item key="4" onClick={handleMenuClick}>
+              文章列表
+            </Menu.Item>
           </SubMenu>
           <Menu.Item key="9" icon={<FileOutlined />}>
             留言管理
@@ -65,7 +69,7 @@ export default function AdminIndex() {
             style={{ padding: 24, minHeight: 360 }}
           >
             <div>
-              <Outlet/>
+              <Outlet />
             </div>
           </div>
         </Content>

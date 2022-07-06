@@ -1,19 +1,19 @@
 /* eslint valid-jsdoc: "off" */
 
-'use strict';
+"use strict";
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
-module.exports = appInfo => {
+module.exports = (appInfo) => {
   /**
    * built-in config
    * @type {Egg.EggAppConfig}
    **/
-  const config = exports = {};
+  const config = (exports = {});
 
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1646724011623_6491';
+  config.keys = appInfo.name + "_1646724011623_6491";
 
   // add your middleware config here
   config.middleware = [];
@@ -27,15 +27,15 @@ module.exports = appInfo => {
     // database configuration
     client: {
       // host
-      host: '119.29.195.26',
+      host: "119.29.195.26",
       // port
-      port: '3306',
+      port: "3306",
       // username
-      user: 'root',
+      user: "root",
       // password
-      password: 'aaaaaaa1',
+      password: "aaaaaaa1",
       // database
-      database: 'react_blog',    
+      database: "react_blog",
     },
     // load into app, default is open
     app: true,
@@ -48,20 +48,19 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: [ '*' ],
-  }
+    domainWhiteList: ["*"],
+  };
 
   // 配置进行跨域
   config.cors = {
     // 注释origin 则允许所有host跨域，允许security 的domainWhiteList 的跨域
     // origin: 'http://localhost:3000',
-    credentials:true, // 允许cookie 跨域
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
-  }
+    credentials: true, // 允许cookie 跨域
+    allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS",
+  };
 
   return {
     ...config,
     ...userConfig,
   };
 };
-

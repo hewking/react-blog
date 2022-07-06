@@ -37,19 +37,21 @@ export default function Home() {
         password: password,
       },
       withCredentials: true, // 前后端共享session
-    }).then((res) => {
-      setLoading(false);
-      if (res.data.data === "登录成功") {
-        localStorage.setItem("openId", res.data.openId);
-        navigate("/index/addArticle");
-        // props.history.push('/index'); react-router v5
-      } else {
-        message.error("用户名或密码错误");
-      }
-    }).catch((err) => {
-      message.error(err.message);
-      setLoading(false);
-    });
+    })
+      .then((res) => {
+        setLoading(false);
+        if (res.data.data === "登录成功") {
+          localStorage.setItem("openId", res.data.openId);
+          navigate("/index/addArticle");
+          // props.history.push('/index'); react-router v5
+        } else {
+          message.error("用户名或密码错误");
+        }
+      })
+      .catch((err) => {
+        message.error(err.message);
+        setLoading(false);
+      });
   };
 
   return (

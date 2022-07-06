@@ -18,11 +18,11 @@ export default function Main() {
         <Route path="/" element={<Login />} />
         <Route path="index" element={<AdminIndex />}>
           <Route path="addArticle" element={<AddArticle />}>
-            <Route path=":id" element={<AddArticle/>}/>
+            <Route path=":id" element={<AddArticle />} />
           </Route>
           {/* 这里和上面在嵌套路径添加id 是一样的效果 */}
           {/* <Route path="addArticle/:id" element={<AddArticle/>}/> */}
-          <Route path="articleList" element={<ArticleList/>}/>
+          <Route path="articleList" element={<ArticleList />} />
         </Route>
       </Routes>
     </Router>

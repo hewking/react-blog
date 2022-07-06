@@ -60,8 +60,8 @@ export default function ArticleList() {
   };
 
   const updateArticle = (id: number) => {
-    navigate('/index/addArticle/' + id);
-  }
+    navigate("/index/addArticle/" + id);
+  };
 
   return (
     <div>
@@ -97,9 +97,14 @@ export default function ArticleList() {
                 <Col span={3}>{item.addTime}</Col>
                 <Col span={4}>{item.view_count}</Col>
                 <Col span={4}>
-                  <Button type="primary" onClick={() => {
-                    updateArticle(item.id)
-                  }}>修改</Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      updateArticle(item.id);
+                    }}
+                  >
+                    修改
+                  </Button>
                   &nbsp;
                   <Button
                     onClick={() => {

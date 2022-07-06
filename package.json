@@ -8,7 +8,8 @@
     "dev:admin": "pnpm -F admin start",
     "dev:server": "pnpm -F service dev",
     "lint": "eslint --cache packages/*/{src,app,types,__tests__}/**",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write --cache ."
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/hewking/react-blog#readme",
   "private ": true,
   "dependencies": {
-    "eslint": "^8.19.0"
+    "eslint": "^8.19.0",
+    "prettier": "^2.7.1"
   }
 }

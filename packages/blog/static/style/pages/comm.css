@@ -3,29 +3,29 @@ body {
 }
 
 .comm-main {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .comm-left {
   background-color: #fff;
-  padding: .3rem;
-  border-radius: .3rem;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
   border: 1px solid #eee;
 }
 
 .comm-right {
   background-color: #fff;
-  margin-left: .5rem;
-  padding: .3rem;
-  border-radius: .3rem;
+  margin-left: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
   border-bottom: 1px solid #eee;
 }
 
 .comm-box {
   background-color: #fff;
-  margin-left: .5rem;
-  padding: .3rem;
-  border-radius: .3rem;
+  margin-left: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
   border: 1px solid #eee;
 }
 

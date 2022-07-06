@@ -8,20 +8,20 @@
 }
 
 .author_intro {
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: #999;
 }
 
-.account {  
+.account {
   background-color: #999;
-  margin-left: .5rem;
-  margin-right: .5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .comm_box {
   background-color: #fff;
-  margin-left: .5rem;
-  padding: .3rem;
-  border-radius: .3rem;
+  margin-left: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
   border: 1px solid #eee;
 }

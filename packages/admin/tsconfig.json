@@ -1,11 +1,7 @@
 {
   "extends": "../tsconfig.setting.json",
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,7 +18,7 @@
     "noImplicitAny": false,
     "paths": {
       "@/*": ["./src/*"]
-    },
+    }
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

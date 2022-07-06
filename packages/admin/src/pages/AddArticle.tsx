@@ -21,7 +21,7 @@ export function AddArticle(props) {
   const [articleTitle, setArticleTitle] = useState(""); //文章标题
   const [articleContent, setArticleContent] = useState(""); //markdown的编辑内容
   const [markdownContent, setMarkdownContent] = useState("预览内容"); //html内容
-  const [  introducemd, setIntroducemd] = useState(); //简介的markdown内容
+  const [introducemd, setIntroducemd] = useState(); //简介的markdown内容
   const [introducehtml, setIntroducehtml] = useState("等待编辑"); //简介的html内容
   const [showDate, setShowDate] = useState(""); //发布日期
   const [updateDate, setUpdateDate] = useState(); //修改日志的日期
@@ -79,7 +79,7 @@ export function AddArticle(props) {
       });
   };
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     getTypeInfo();
@@ -166,7 +166,7 @@ export function AddArticle(props) {
     })
       .then((res) => {
         const data = res.data.data[0];
-        console.log('data:', data);
+        console.log("data:", data);
         setArticleId(data.id);
         setArticleTitle(data.title);
         setArticleContent(data.article_content);
@@ -181,7 +181,7 @@ export function AddArticle(props) {
       .catch((err) => {
         message.error("获取文章信息失败");
       });
-  }
+  };
 
   return (
     <div>

@@ -1,5 +1,3 @@
 {
-  "include": [
-    "**/*"
-, "../admin/src/config"  ]
+  "include": ["**/*", "../admin/src/config"]
 }
