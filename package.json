@@ -11,6 +11,24 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write --cache ."
   },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged --concurrent false",
+    "commit-msg": "pnpm exec tsx scripts/verifyCommit.ts $1"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ],
+    "packages/*/{src,types}/**/*.ts": [
+      "eslint --cache --fix"
+    ],
+    "packages/**/*.d.ts": [
+      "eslint --cache --fix"
+    ],
+    "playground/**/__tests__/**/*.ts": [
+      "eslint --cache --fix"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hewking/react-blog.git"
@@ -25,8 +43,11 @@
   },
   "homepage": "https://github.com/hewking/react-blog#readme",
   "private ": true,
-  "dependencies": {
+  "devDependencies": {
     "eslint": "^8.19.0",
-    "prettier": "^2.7.1"
+    "lint-staged": "^13.0.3",
+    "picocolors": "^1.0.0",
+    "prettier": "^2.7.1",
+    "simple-git-hooks": "^2.8.0"
   }
 }
