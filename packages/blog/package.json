@@ -7,7 +7,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "type": "module",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@mono/utils": "workspace:*",
