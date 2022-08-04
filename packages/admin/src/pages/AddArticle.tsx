@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { marked, Renderer } from "marked";
 import "../static/css/AddArticle.css";
 import { Row, Col, Input, Select, Button, DatePicker, message } from "antd";
@@ -59,7 +59,7 @@ export function AddArticle(props) {
     setArticleTitle(e.target.value);
   };
 
-  const getTypeInfo = () => {
+  const getTypeInfo = useCallback(() => {
     axios({
       method: "get",
       url: servicePath.getTypeInfo,
@@ -67,7 +67,7 @@ export function AddArticle(props) {
     })
       .then((res) => {
         const data = res.data.data;
-        if (data == "没有登录") {
+        if (data === "没有登录") {
           navigate("/");
           localStorage.removeItem("openId");
         } else {
@@ -77,7 +77,7 @@ export function AddArticle(props) {
       .catch((err) => {
         message.error("获取文章类别信息失败");
       });
-  };
+  }, [navigate]);
 
   const { id } = useParams();
 
@@ -88,7 +88,7 @@ export function AddArticle(props) {
       setArticleId(Number(id));
       getArticleById(id);
     }
-  }, []);
+  }, [getTypeInfo, id]);
 
   const saveArticle = () => {
     if (!selectedType) {
